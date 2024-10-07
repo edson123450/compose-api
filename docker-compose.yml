@@ -1,0 +1,49 @@
+version: '3'
+services:
+  microservicio1:
+    image: api-microservicio1:latest
+    container_name: microservicio1
+    build:
+      context: ./api-microservicio1
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    networks:
+      - mi_red_microservicios
+
+  microservicio2:
+    image: api-microservicio2:latest
+    container_name: microservicio2
+    build:
+      context: ./api-microservicio2
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    networks:
+      - mi_red_microservicios
+
+  microservicio3:
+    image: api-microservicio3:latest
+    container_name: microservicio3
+    build:
+      context: ./api-microservicio3
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8003"
+    networks:
+      - mi_red_microservicios
+
+  orquestador:
+    image: api-orquestador:latest
+    container_name: api-orquestador
+    build:
+      context: ./api-orquestador
+      dockerfile: Dockerfile
+    ports:
+      - "8004:8004"
+    networks:
+      - mi_red_microservicios
+
+networks:
+  mi_red_microservicios:
+    driver: bridge
